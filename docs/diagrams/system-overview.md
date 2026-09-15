@@ -1,6 +1,6 @@
-# System Overview (DRAFT — high-level, for review)
+# System Overview (level 1)
 
-> **Status: draft, level 1 of N.** This is deliberately shallow — just the actors and major building blocks, so we can agree on the shape before drilling into any one piece. Nothing here is final.
+> High-level actors and major building blocks. See the Level-2 diagrams below for detail on each module.
 
 ## The picture
 
@@ -22,13 +22,17 @@ flowchart LR
         Platform["Ingestion + data store\n+ AI model gateway"]
     end
 
-    subgraph AI["AI capabilities"]
+    subgraph AICustomer["AI — customer-facing"]
         Concierge["a. Visitor AI concierge"]
+        Offers["f1. Personalized offers & campaigns\n(surface of Revenue & Retention)"]
+    end
+
+    subgraph AIBackend["AI — backend & operations"]
         Crowd["b. Crowd & popularity analytics"]
         AnimalHealth["c. Animal health & population monitoring"]
         PlantHealth["d. Plant & garden health monitoring"]
         Maintenance["e. Predictive maintenance (rides)"]
-        Revenue["f. Revenue & retention AI"]
+        RevenueEngine["f2. Revenue & retention engine\n(forecasting, pricing, churn model)"]
     end
 
     Visitor(["Visitor"])
@@ -41,31 +45,56 @@ flowchart LR
     Platform --> AnimalHealth
     Platform --> PlantHealth
     Platform --> Maintenance
-    Platform --> Revenue
+    Platform --> RevenueEngine
+    RevenueEngine --> Offers
 
     Visitor <--> Concierge
+    Visitor <--> Offers
     Staff <--> Crowd
     Staff <--> Maintenance
     Vet <--> AnimalHealth
     Vet <--> PlantHealth
-    Staff <--> Revenue
+    Staff <--> RevenueEngine
 ```
 
 No key needed yet — everything here is just a box; we'll add shape/color meaning once diagrams get more specific.
 
-## The six AI capabilities, in one paragraph each
+## The six AI capabilities, grouped by who they serve
 
-- **a. Visitor AI concierge** — a chat assistant visitors talk to (app/kiosk) that can check wait times, suggest a route around crowding, and adjust or buy tickets. Customer-facing; the one place we're deliberately going agentic (LLM + tool calls), because it's the one capability that's actually a conversation.
-- **b. Crowd & popularity analytics** — turns footfall/camera data into "which parts of the estate are busy right now," feeding staffing decisions and (later) pricing. Business-facing, answers "we have no idea what's popular."
+Six capability *domains* (a–f), documented as **seven diagrams/ADR-level views** — `f` (Revenue & Retention) is one domain, deliberately split into two separately-diagrammed surfaces (`f1` customer-facing, `f2` backend) because they have different consumers and risk profiles (see `docs/adr/0005-split-revenue-and-offers.md`). It is not a seventh capability — "six capabilities, one of which has two views" is the precise framing used consistently across this repo.
+
+**Customer-facing:**
+- **a. Visitor AI concierge** — a chat assistant visitors talk to (app/kiosk) that can check wait times, suggest a route around crowding, and adjust or buy tickets. The one place we're deliberately going agentic (LLM + tool calls), because it's the one capability that's actually a conversation.
+- **f1. Personalized offers & campaigns** — the visitor-facing surface of Revenue & Retention: loyalty/referral programs, seasonal campaigns, personalized win-back offers to turn one-time visitors into repeat ones.
+
+**Backend & operations:**
+- **b. Crowd & popularity analytics** — turns footfall/camera data into "which parts of the estate are busy right now," feeding staffing decisions and (later) pricing. Answers "we have no idea what's popular."
 - **c. Animal health & population monitoring** — watches feeding, weight, water quality, and behavior across the 55 enclosures, plus counts the piranha population; flags a vet rather than acting on its own.
 - **d. Plant & garden health monitoring** — same shape as (c) but for the carnivorous plant collection and grounds: soil/humidity/light sensors + imaging, flags a horticulturist. Added because the plant collection is explicitly named in the brief as an asset the family could lose — it deserves the same care as the animals, not an afterthought.
 - **e. Predictive maintenance for rides** — watches ride telemetry (vibration, cycles) to flag problems on 18th-century rides before they fail. Safety + cost.
-- **f. Revenue & retention AI** — forecasts demand to drive pricing/bundling, and predicts who's likely to churn to drive repeat visits. The direct answer to "grow to 15,000 visitors/day and stay profitable."
+- **f2. Revenue & retention engine** — forecasts demand to drive dynamic pricing/bundling, and predicts who's likely to churn; its output *drives* f1's campaigns and offers but the modeling itself is a backend, staff-facing capability.
+
+`f` is one capability domain with two faces — the engine (backend, `f2`) and the offers it produces (customer-facing, `f1`) — split into two diagrams because those two faces have different consumers and risk profiles, not because there are seven capabilities.
 
 Underneath all six: an **edge/MQTT layer** that copes with patchy on-site wifi (buffers locally, syncs when it can), and a **cloud platform** with a **model gateway** sitting in front of whatever AI providers/models we actually pick — so we're not locked into one vendor. Both are just named here; not designed yet.
 
-## Questions for you
+**Consistency check across all six** (a running concern, not a one-time pass): each backend capability follows the same shape — sensor/data in, anomaly/model output, a human (vet, horticulturist, staff) in the loop before anything acts on it — and every capability, customer-facing or not, ultimately depends on the same model gateway, so swapping or losing an AI provider is a platform-level fix, not a six-times-over rewrite.
 
-- Right six capabilities, or should any be split, merged, or dropped?
-- Any estate asset we're still missing (the brief mentions rides, animals, and — via the "carnivorous plant collection" aside — gardens; anything else)?
-- Which one do you want to drill into first once you've reacted to this?
+## Level-2 diagrams (one per module, zoomed in one level)
+
+All eight boxes from the picture above now have a level-2 view:
+
+| Module | Diagram |
+|---|---|
+| Estate / on-site (edge, sensors, patchy-wifi handling) | [`onsite-edge.md`](onsite-edge.md) |
+| Cloud data & AI platform (ingestion, storage, model gateway) | [`cloud-platform.md`](cloud-platform.md) |
+| b. Crowd & popularity analytics | [`ai-crowd-analytics.md`](ai-crowd-analytics.md) |
+| c. Animal health & population monitoring | [`ai-animal-health.md`](ai-animal-health.md) |
+| d. Plant & garden health monitoring | [`ai-plant-health.md`](ai-plant-health.md) |
+| e. Predictive maintenance (rides) | [`ai-predictive-maintenance.md`](ai-predictive-maintenance.md) |
+| f2. Revenue & retention engine (backend) | [`ai-revenue-retention.md`](ai-revenue-retention.md) |
+| a. Visitor AI concierge | [`ai-visitor-concierge.md`](ai-visitor-concierge.md) |
+| f1. Personalized offers & campaigns | [`ai-offers-campaigns.md`](ai-offers-campaigns.md) |
+| Ticketing, family passes & gate validation (standalone domain, non-AI-specific) | [`ticketing-gate.md`](ticketing-gate.md) |
+
+Level 2 is complete for every module. Level 3 detail (agent internals) is drawn for the visitor concierge — [`ai-visitor-concierge-detail.md`](ai-visitor-concierge-detail.md) — and per-capability technique choices are documented as ADRs (`docs/adr/0007`–`0012`). Cross-cutting operating concerns: AI validation/monitoring/rollback criteria ([`0013`](../adr/0013-ai-validation-monitoring-rollback.md)) and capacity/scale assumptions ([`0014`](../adr/0014-capacity-and-scale-assumptions.md)).

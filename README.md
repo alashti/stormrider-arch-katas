@@ -2,7 +2,7 @@
 
 Our team's submission for O'Reilly's **Architectural Katas 2026: AI-Assisted Software Architecture**.
 
-> ⚠️ **TODO**: add team name and members here before final submission (per past years' rules, do not include personal names, employers, or other identifying info in this public repo).
+**Team members**: Amin Heydari Alashti, Kateryna Shylina, William Lee, Connor Spear.
 
 ## The problem, in a nutshell
 
@@ -18,7 +18,7 @@ Full brief: [`docs/problem-statement.md`](docs/problem-statement.md)
 |---|---|
 | [`docs/overview.md`](docs/overview.md) | Short narrative: how we used AI to solve the estate's problems |
 | [`docs/problem-statement.md`](docs/problem-statement.md) | The original kata brief, captured in full |
-| [`docs/diagrams/`](docs/diagrams/) | Architecture diagrams — comprehensive + targeted views per AI use |
+| [`docs/diagrams/`](docs/diagrams/) | Architecture diagrams — comprehensive + targeted views per AI use, plus supporting domain views (ticketing & gate validation) |
 | [`docs/adr/`](docs/adr/) | Architecture Decision Records for AI-related choices, with trade-off analysis |
 | [`implementation/`](implementation/) | (Optional) supporting code/prototypes, if we build any |
 | [`docs/judging-checklist.md`](docs/judging-checklist.md) | Our own checklist against the deliverables & judging criteria |
