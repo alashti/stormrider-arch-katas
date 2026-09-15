@@ -1,6 +1,6 @@
-# e. Predictive Maintenance for Rides (DRAFT — level 2, backend)
+# e. Predictive Maintenance for Rides (level 2, backend)
 
-> **Status: draft, level 2.** Zooming into capability **e** from `system-overview.md`. Backend/operations capability, but the highest-stakes of the five — this is a visitor-safety system wearing a maintenance-scheduling hat.
+> Zooms into capability **e** from `system-overview.md`. Backend/operations capability, but the highest-stakes of the five — this is a visitor-safety system wearing a maintenance-scheduling hat. Technique choice: [`docs/adr/0009-predictive-maintenance-model-technique.md`](../adr/0009-predictive-maintenance-model-technique.md).
 
 ## The picture
 

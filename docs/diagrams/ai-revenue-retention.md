@@ -1,6 +1,6 @@
-# f2. Revenue & Retention Engine (DRAFT — level 2, backend half of capability f)
+# f2. Revenue & Retention Engine (level 2, backend half of capability f)
 
-> **Status: draft, level 2.** Zooming into the backend half of capability **f** from `system-overview.md`. This diagram stops where it hands off to **f1** (personalized offers & campaigns) — the customer-facing half, deliberately deferred to a later pass.
+> Zooms into the backend half of capability **f** from `system-overview.md`. This diagram stops where it hands off to **f1** (personalized offers & campaigns). Technique choice: [`docs/adr/0011-revenue-retention-model-technique.md`](../adr/0011-revenue-retention-model-technique.md).
 
 ## The picture
 

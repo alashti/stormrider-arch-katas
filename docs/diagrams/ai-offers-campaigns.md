@@ -1,6 +1,6 @@
-# f1. Personalized Offers & Campaigns (DRAFT — level 2, customer-facing)
+# f1. Personalized Offers & Campaigns (level 2, customer-facing)
 
-> **Status: draft, level 2.** Zooming into the customer-facing half of capability **f** from `system-overview.md`. Picks up exactly where `ai-revenue-retention.md` (f2) leaves off — it hands this module "segments," and this is what happens to them.
+> Zooms into the customer-facing half of capability **f** from `system-overview.md`. Picks up exactly where `ai-revenue-retention.md` (f2) leaves off — it hands this module "segments," and this is what happens to them.
 
 ## The picture
 

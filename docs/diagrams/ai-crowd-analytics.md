@@ -1,6 +1,6 @@
-# b. Crowd & Popularity Analytics (DRAFT — level 2, backend)
+# b. Crowd & Popularity Analytics (level 2, backend)
 
-> **Status: draft, level 2.** Zooming into capability **b** from `system-overview.md`. Backend/operations capability — no customer-facing surface of its own (its output feeds staff decisions and, indirectly, pricing).
+> Zooms into capability **b** from `system-overview.md`. Backend/operations capability — no customer-facing surface of its own (its output feeds staff decisions and, indirectly, pricing). Technique choice: [`docs/adr/0010-crowd-analytics-fusion-technique.md`](../adr/0010-crowd-analytics-fusion-technique.md).
 
 ## The picture
 

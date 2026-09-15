@@ -1,6 +1,6 @@
-# c. Animal Health & Population Monitoring (DRAFT — level 2, backend)
+# c. Animal Health & Population Monitoring (level 2, backend)
 
-> **Status: draft, level 2.** Zooming into capability **c** from `system-overview.md`. Backend/operations capability — output reaches a vet, never a visitor.
+> Zooms into capability **c** from `system-overview.md`. Backend/operations capability — output reaches a vet, never a visitor. Technique choice: [`docs/adr/0007-animal-health-anomaly-detection-technique.md`](../adr/0007-animal-health-anomaly-detection-technique.md).
 
 ## The picture
 

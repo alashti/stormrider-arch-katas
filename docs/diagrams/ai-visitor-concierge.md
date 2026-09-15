@@ -1,6 +1,6 @@
-# a. Visitor AI Concierge (DRAFT — level 2, customer-facing)
+# a. Visitor AI Concierge (level 2, customer-facing)
 
-> **Status: draft, level 2.** Zooming into capability **a** from `system-overview.md`. Customer-facing — the one capability that's actually a conversation, and the one deliberately built agentic (LLM + tool calls), mirroring the brief's own example diagram.
+> Zooms into capability **a** from `system-overview.md`. Customer-facing — the one capability that's actually a conversation, and the one deliberately built agentic (LLM + tool calls), mirroring the brief's own example diagram. Agent-stack choices: [`docs/adr/0012-visitor-concierge-agent-stack.md`](../adr/0012-visitor-concierge-agent-stack.md).
 
 ## The picture
 
@@ -36,9 +36,12 @@ flowchart LR
 - **Reuses crowd-analytics outputs rather than re-deriving them.** Wait times and route recommendations are tool calls into `b`'s heatmap and flow map (the flow map addition from the crowd-analytics refinement is exactly what makes route recommendation possible) — one source of truth for "what's busy and how to get around it," consumed here, not recomputed.
 - **Everything goes through the model gateway**, same as every other capability — so a provider swap or outage affects this agent the same structural way it affects the backend capabilities, not as a special case.
 
+## Level-3 detail
+
+Agent-loop internals (tool schema, hybrid RAG retrieval, tool-failure handling) are drawn in [`ai-visitor-concierge-detail.md`](ai-visitor-concierge-detail.md), decisions justified in [`docs/adr/0012-visitor-concierge-agent-stack.md`](../adr/0012-visitor-concierge-agent-stack.md).
+
 ## What's still open (for a later pass, not now)
 
-- What happens when the agent is uncertain or the tool calls fail (e.g., booking system momentarily unavailable) — a graceful-degradation path, not designed yet.
 - Whether the concierge also handles post-visit interactions (reviews, complaints) or stays scoped to pre-visit/in-visit only.
 
 ## Questions for you

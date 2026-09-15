@@ -1,6 +1,6 @@
-# d. Plant & Garden Health Monitoring (DRAFT — level 2, backend)
+# d. Plant & Garden Health Monitoring (level 2, backend)
 
-> **Status: draft, level 2.** Zooming into capability **d** from `system-overview.md`. Deliberately mirrors `ai-animal-health.md`'s shape — same risk profile (living-thing welfare, not visitor safety), same pattern.
+> Zooms into capability **d** from `system-overview.md`. Deliberately mirrors `ai-animal-health.md`'s shape — same risk profile (living-thing welfare, not visitor safety), same pattern. Technique choice: [`docs/adr/0008-plant-health-detection-technique.md`](../adr/0008-plant-health-detection-technique.md).
 
 ## The picture
 

@@ -1,6 +1,6 @@
-# On-Site / Edge Layer (DRAFT — level 2, for review)
+# On-Site / Edge Layer (level 2)
 
-> **Status: draft, level 2 of N.** Zooming into the "Estate (on-site)" box from [`system-overview.md`](system-overview.md) — one level deeper, no further. The cloud platform and the AI capabilities themselves are still out of scope here.
+> Zooms into the "Estate (on-site)" box from [`system-overview.md`](system-overview.md) — one level deeper, no further. The cloud platform and the AI capabilities themselves are covered in their own diagrams.
 
 ## The picture
 

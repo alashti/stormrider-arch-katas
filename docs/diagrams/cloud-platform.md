@@ -1,6 +1,6 @@
-# Cloud Platform & Model Gateway (DRAFT — level 2, for review)
+# Cloud Platform & Model Gateway (level 2)
 
-> **Status: draft, level 2 of N.** Zooming into the "Cloud data & AI platform" box from [`system-overview.md`](system-overview.md) — one level deeper, no further. Individual AI capabilities (a–f) are still black boxes here; their internals are a later, per-capability pass.
+> Zooms into the "Cloud data & AI platform" box from [`system-overview.md`](system-overview.md) — one level deeper, no further. Individual AI capabilities (a–f) are black boxes here; see their own diagrams for internals.
 
 ## The picture
 

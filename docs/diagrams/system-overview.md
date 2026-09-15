@@ -1,6 +1,6 @@
-# System Overview (DRAFT — high-level, for review)
+# System Overview (level 1)
 
-> **Status: draft, level 1 of N.** This is deliberately shallow — just the actors and major building blocks, so we can agree on the shape before drilling into any one piece. Nothing here is final.
+> High-level actors and major building blocks. See the Level-2 diagrams below for detail on each module.
 
 ## The picture
 
@@ -94,4 +94,4 @@ All eight boxes from the picture above now have a level-2 view:
 | a. Visitor AI concierge | [`ai-visitor-concierge.md`](ai-visitor-concierge.md) |
 | f1. Personalized offers & campaigns | [`ai-offers-campaigns.md`](ai-offers-campaigns.md) |
 
-Level 2 is now complete for every module. Next up (once reviewed): level 3 — going deeper into whichever module needs it most.
+Level 2 is complete for every module. Level 3 detail (agent internals) is drawn for the visitor concierge — [`ai-visitor-concierge-detail.md`](ai-visitor-concierge-detail.md) — and per-capability technique choices are documented as ADRs (`docs/adr/0007`–`0012`).
