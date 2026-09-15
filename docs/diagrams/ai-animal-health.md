@@ -7,7 +7,7 @@
 ```mermaid
 flowchart LR
     subgraph Inputs["Inputs (via cloud-platform.md feature store)"]
-        Feeder["Smart-feeder load cells"]
+        Feeder["Smart-feeder load cells:\nfood dispensed vs. consumed"]
         Water["Water-quality probes\n(incl. piranha tanks)"]
         EnvSensor["Terrarium environment sensors"]
         Camera["Enclosure-camera behavior/count\nsignals (edge-CV output)"]
@@ -38,6 +38,7 @@ flowchart LR
 ## Why this shape
 
 - **Two model types, one score.** Telemetry anomaly detection (feeding, weight, water quality) and CV-based behavior classification are different techniques feeding the same per-enclosure risk score — because a sick animal shows up in both eating-less-than-usual data *and* different on-camera behavior, and neither signal alone is reliable enough on its own across 55 enclosures.
+- **"How much/well they are eating" is expressed as explicit metrics, not just a raw feeder reading.** The brief asks for this by name, so the feeding-telemetry anomaly model is defined over: food consumed vs. an expected per-species baseline, feeding duration/session length, missed-feeding events (no consumption detected within an expected window), and a rolling consumption trend per animal/enclosure (a slow decline reads differently than a single skipped meal). These are the features `Anomaly` actually trains/infers on, not just "feeder load cell value."
 - **The vet sees raw readings alongside the score, not instead of it.** An aggregated risk score is good for triage ("which of 55 enclosures needs attention first"), but it can hide *which specific reading* is off, or mask a case where two signals disagree (e.g., weight is fine but water quality is trending badly). The vet gets both: the aggregated score to prioritize, and the individual feeding/weight/water-quality/behavior readings to actually diagnose — the model doesn't get to decide that's unnecessary detail.
 - **Population counting is a separate output, not folded into the risk score.** Counting piranhas is a distinct problem (object detection/tracking on a tank camera feed) from "is this animal healthy" — it answers a different brief requirement (population levels) and doesn't need to share a model with health anomaly detection.
 - **The vet is the only actor who can trigger action.** No automated feeding, dosing, or enclosure change happens off this pipeline — it only ever produces an alert. This is the highest-welfare-stakes backend capability, so the human-in-the-loop checkpoint is a hard gate, not a dashboard someone might ignore.

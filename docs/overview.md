@@ -21,6 +21,8 @@ Each capability uses the AI technique that actually fits its problem — anomaly
 
 **For visitors**: a concierge that actually knows the park (grounded, not guessing) and can book a ticket end-to-end with no more friction than any commercial booking site — plus offers that are actually relevant because they're built from real visit history, not blasted at everyone.
 
-**The uncertainty answer, in one line**: no capability ever talks to an AI provider directly — everything goes through one gateway with a fallback chain, and every human-reviewed decision across all six capabilities doubles as training data for an owned model that reduces third-party dependency over time (`docs/adr/0001`).
+**The uncertainty answer, in one line**: no capability ever talks to an AI provider directly — everything goes through one gateway with a fallback chain, and every human-reviewed decision across all six capabilities doubles as training data for an owned model that reduces third-party dependency over time (`docs/adr/0001`). Concrete, per-capability confidence thresholds, drift triggers, release gates, rollback and fallback criteria, and escalation paths are fixed in `docs/adr/0013` — the direct answer to "how will you know if the AI starts misbehaving in production."
 
-Full depth is in [`docs/diagrams/`](diagrams/) (comprehensive + per-capability views, including level-3 agent internals for the concierge) and [`docs/adr/`](adr/) (12 decision records with trade-off analysis).
+Ticket purchasing and family passes get their own standalone domain view ([`ticketing-gate.md`](diagrams/ticketing-gate.md)) beyond the concierge's booking tool calls — inventory, payment failure handling, refunds, issuance, and gate validation (including offline behavior during a connectivity gap). Rough capacity/scale assumptions for the 5,000 → 15,000 visitors/day growth target are in `docs/adr/0014`.
+
+Full depth is in [`docs/diagrams/`](diagrams/) (comprehensive + per-capability views, including level-3 agent internals for the concierge, and the standalone ticketing/gate view) and [`docs/adr/`](adr/) (15 decision records with trade-off analysis).

@@ -14,3 +14,17 @@ Default to [Mermaid](https://mermaid.js.org/) diagrams in `.md` files — GitHub
 - `ai-<use-case>.md` — one per targeted AI use case (e.g. `ai-visitor-analytics.md`, `ai-animal-monitoring.md`, `ai-ticketing.md`)
 
 If a diagram is easier to draw as an image (e.g. exported from Excalidraw or a whiteboard photo), drop the image file alongside a short `.md` that embeds it and explains what it shows.
+
+## Shared shape legend
+
+Every diagram in this folder uses these shapes consistently — stated once here rather than repeated per file:
+
+| Shape | Meaning |
+|---|---|
+| Rectangle (`["..."]`) | A process, model, store, or data flow — the default node |
+| Rounded / stadium (`(["..."])`) | A human actor (visitor, vet, horticulturist, staff) or an external system |
+| Hexagon (`{{"..."}}`) | A decision point, guardrail check, or gate — something that branches or blocks flow |
+| Solid arrow | A direct read/write or call in the "happy path" |
+| Dashed arrow | A calibration/feedback loop, a fallback path, or an otherwise secondary/conditional flow (each diagram's own key, where present, states the specific meaning) |
+
+A few diagrams (`onsite-edge.md`, `cloud-platform.md`) additionally define one or two file-specific meanings inline, called out in their own "Key" line — those are refinements of this shared legend, not a different convention.

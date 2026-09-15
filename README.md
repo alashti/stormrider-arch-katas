@@ -18,7 +18,7 @@ Full brief: [`docs/problem-statement.md`](docs/problem-statement.md)
 |---|---|
 | [`docs/overview.md`](docs/overview.md) | Short narrative: how we used AI to solve the estate's problems |
 | [`docs/problem-statement.md`](docs/problem-statement.md) | The original kata brief, captured in full |
-| [`docs/diagrams/`](docs/diagrams/) | Architecture diagrams — comprehensive + targeted views per AI use |
+| [`docs/diagrams/`](docs/diagrams/) | Architecture diagrams — comprehensive + targeted views per AI use, plus supporting domain views (ticketing & gate validation) |
 | [`docs/adr/`](docs/adr/) | Architecture Decision Records for AI-related choices, with trade-off analysis |
 | [`implementation/`](implementation/) | (Optional) supporting code/prototypes, if we build any |
 | [`docs/judging-checklist.md`](docs/judging-checklist.md) | Our own checklist against the deliverables & judging criteria |

@@ -10,7 +10,7 @@ The brief frames "revenue & retention" as one AI capability: forecasting demand 
 
 ## Decision
 
-Split capability `f` into two separately-diagrammed capabilities that share one hand-off contract:
+Split capability `f` into two separately-diagrammed **surfaces of the same capability domain** — not a seventh capability; the design still refers to "six capabilities," one of which (`f`) has two views — that share one hand-off contract:
 
 - **`f2` — Revenue & retention engine** (backend, staff-facing): owns demand forecasting and churn prediction. Its outputs are pricing/bundling recommendations (to the ticketing system, gated by a guardrail + business approval) and at-risk/target visitor **segments**, handed to `f1`. See `docs/diagrams/ai-revenue-retention.md`.
 - **`f1` — Personalized offers & campaigns** (customer-facing): consumes `f2`'s segments only — it does not run its own churn/targeting model. It owns offer-template generation, human (marketing/business) review at the template/campaign level, per-visitor instantiation, an automated frequency/tone guardrail, and delivery. See `docs/diagrams/ai-offers-campaigns.md`.

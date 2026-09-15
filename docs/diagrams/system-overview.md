@@ -61,6 +61,8 @@ No key needed yet — everything here is just a box; we'll add shape/color meani
 
 ## The six AI capabilities, grouped by who they serve
 
+Six capability *domains* (a–f), documented as **seven diagrams/ADR-level views** — `f` (Revenue & Retention) is one domain, deliberately split into two separately-diagrammed surfaces (`f1` customer-facing, `f2` backend) because they have different consumers and risk profiles (see `docs/adr/0005-split-revenue-and-offers.md`). It is not a seventh capability — "six capabilities, one of which has two views" is the precise framing used consistently across this repo.
+
 **Customer-facing:**
 - **a. Visitor AI concierge** — a chat assistant visitors talk to (app/kiosk) that can check wait times, suggest a route around crowding, and adjust or buy tickets. The one place we're deliberately going agentic (LLM + tool calls), because it's the one capability that's actually a conversation.
 - **f1. Personalized offers & campaigns** — the visitor-facing surface of Revenue & Retention: loyalty/referral programs, seasonal campaigns, personalized win-back offers to turn one-time visitors into repeat ones.
@@ -72,7 +74,7 @@ No key needed yet — everything here is just a box; we'll add shape/color meani
 - **e. Predictive maintenance for rides** — watches ride telemetry (vibration, cycles) to flag problems on 18th-century rides before they fail. Safety + cost.
 - **f2. Revenue & retention engine** — forecasts demand to drive dynamic pricing/bundling, and predicts who's likely to churn; its output *drives* f1's campaigns and offers but the modeling itself is a backend, staff-facing capability.
 
-`f` is genuinely two capabilities wearing one name — the engine (backend) and the offers it produces (customer-facing) — so it's split into `f1`/`f2` rather than forced into one box.
+`f` is one capability domain with two faces — the engine (backend, `f2`) and the offers it produces (customer-facing, `f1`) — split into two diagrams because those two faces have different consumers and risk profiles, not because there are seven capabilities.
 
 Underneath all six: an **edge/MQTT layer** that copes with patchy on-site wifi (buffers locally, syncs when it can), and a **cloud platform** with a **model gateway** sitting in front of whatever AI providers/models we actually pick — so we're not locked into one vendor. Both are just named here; not designed yet.
 
@@ -93,5 +95,6 @@ All eight boxes from the picture above now have a level-2 view:
 | f2. Revenue & retention engine (backend) | [`ai-revenue-retention.md`](ai-revenue-retention.md) |
 | a. Visitor AI concierge | [`ai-visitor-concierge.md`](ai-visitor-concierge.md) |
 | f1. Personalized offers & campaigns | [`ai-offers-campaigns.md`](ai-offers-campaigns.md) |
+| Ticketing, family passes & gate validation (standalone domain, non-AI-specific) | [`ticketing-gate.md`](ticketing-gate.md) |
 
-Level 2 is complete for every module. Level 3 detail (agent internals) is drawn for the visitor concierge — [`ai-visitor-concierge-detail.md`](ai-visitor-concierge-detail.md) — and per-capability technique choices are documented as ADRs (`docs/adr/0007`–`0012`).
+Level 2 is complete for every module. Level 3 detail (agent internals) is drawn for the visitor concierge — [`ai-visitor-concierge-detail.md`](ai-visitor-concierge-detail.md) — and per-capability technique choices are documented as ADRs (`docs/adr/0007`–`0012`). Cross-cutting operating concerns: AI validation/monitoring/rollback criteria ([`0013`](../adr/0013-ai-validation-monitoring-rollback.md)) and capacity/scale assumptions ([`0014`](../adr/0014-capacity-and-scale-assumptions.md)).

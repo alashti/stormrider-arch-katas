@@ -35,6 +35,7 @@ flowchart LR
 - **Grounded, not free-floating.** The agent answers from the vector-store/knowledge base (park info, live status) via RAG, rather than generating facts from the model alone — the risk profile here is "confidently wrong," not welfare/safety, so the validation concern is grounding and hallucination-avoidance rather than a confirm/dismiss loop.
 - **Reuses crowd-analytics outputs rather than re-deriving them.** Wait times and route recommendations are tool calls into `b`'s heatmap and flow map (the flow map addition from the crowd-analytics refinement is exactly what makes route recommendation possible) — one source of truth for "what's busy and how to get around it," consumed here, not recomputed.
 - **Everything goes through the model gateway**, same as every other capability — so a provider swap or outage affects this agent the same structural way it affects the backend capabilities, not as a special case.
+- **Booking tool calls reach into a standalone ticketing domain, not a booking system invented just for the agent.** `search_availability`/`add_to_cart`/`checkout` call into the same inventory, family-pass rules, payment, and issuance flow a direct (non-agent) purchase would use — see [`ticketing-gate.md`](ticketing-gate.md) for that domain, including payment-failure handling, refunds, and gate validation, which are out of scope for this file.
 
 ## Level-3 detail
 

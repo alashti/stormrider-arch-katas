@@ -44,7 +44,7 @@ flowchart TB
         Cost["Per-provider cost & latency tracking"]
     end
 
-    subgraph Capabilities["The six AI capabilities (black boxes at this level)"]
+    subgraph Capabilities["The six capability domains (black boxes at this level;\nf shown unsplit here — see ai-revenue-retention.md\n(f2) / ai-offers-campaigns.md (f1) for its split)"]
         Concierge["a. Visitor concierge"]
         Crowd["b. Crowd analytics"]
         AnimalHealth["c. Animal health"]
@@ -60,8 +60,8 @@ flowchart TB
     Stream --> Features
     Lake --> Vectors
 
-    Capabilities --> Features
-    Capabilities --> Vectors
+    Features --> Capabilities
+    Vectors --> Capabilities
     Capabilities --> Router
     Router --> Observability
     Observability --> StaffDash
@@ -69,7 +69,7 @@ flowchart TB
     Capabilities -.->|"every confirm/dismiss/\napproval decision"| TrainingData
 ```
 
-**Key:** dashed arrows inside the gateway are the fallback order — if Provider A fails, is too slow, or gets too expensive, the router falls back to B, then C, without any capability needing to know or care which provider actually answered. The dashed arrow into the training-data store is the same human-in-the-loop decisions already shown in each capability's own diagram (vet confirm/dismiss, staff sign-off, business approval, marketing template approval) — collected centrally here rather than staying siloed per capability.
+**Key:** solid arrows are reads/writes of data (e.g., `Features --> Capabilities` means capabilities *read* from the feature store, not write to it — the only things capabilities write are the training-data flywheel's confirm/dismiss/approval events, shown separately below). Dashed arrows inside the gateway are the fallback order — if Provider A fails, is too slow, or gets too expensive, the router falls back to B, then C, without any capability needing to know or care which provider actually answered. The dashed arrow into the training-data store is the same human-in-the-loop decisions already shown in each capability's own diagram (vet confirm/dismiss, staff sign-off, business approval, marketing template approval) — collected centrally here rather than staying siloed per capability.
 
 ## The decision this diagram is making
 
