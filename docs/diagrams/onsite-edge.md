@@ -7,9 +7,17 @@
 ```mermaid
 flowchart TB
     subgraph RidesZone["Zone: Rides (40)"]
-        RideSensors["Vibration / cycle-count telemetry\n+ safety interlock status, per ride"]
+        RideMech["Structural/mechanical: vibration, motor/drive temp,\nhydraulic/brake pressure, acoustic, lubrication level"]
+        RideSafety["Safety-critical: restraint/harness lock status,\nemergency-stop trigger log"]
+        RideUsage["Usage/load: cycle count & operating hours,\nper-car weight, speed/RPM"]
+        RideEnv["Environmental: corrosion/moisture\n(historic ironwork, outdoor exposure)"]
+        RideQueue["Queue-length sensor per ride\n(IR beam / camera-derived count)"]
         RideGW["Zone gateway\nlocal MQTT broker + store-and-forward queue"]
-        RideSensors --> RideGW
+        RideMech --> RideGW
+        RideSafety --> RideGW
+        RideUsage --> RideGW
+        RideEnv --> RideGW
+        RideQueue --> RideGW
     end
 
     subgraph AnimalZone["Zone: Animal enclosures (55)"]
@@ -48,6 +56,7 @@ flowchart TB
 2. **Store-and-forward at every gateway.** Each zone gateway holds a local MQTT broker with a persistent queue — sensors always have somewhere to publish to, even with zero uplink, and nothing is lost, only delayed.
 3. **Camera data never leaves the zone as raw video.** Both animal-enclosure and garden zones run lightweight edge inference locally (behavior flags, population counts, disease signals) and only forward the derived signal, not the footage. This is what actually makes the wifi constraint survivable for the two capabilities that would otherwise be bandwidth-heavy.
 4. **Not all data is equal once it does get a chance to sync.** Safety-relevant signals (ride anomalies, acute animal-health alerts) are marked priority so they jump the queue over routine analytics data (footfall counts, routine garden readings) when the uplink window is short.
+5. **Ride telemetry is broken into four categories, not one blob.** Structural/mechanical (vibration, temp, pressure, acoustic, lubrication) and usage/load (cycles, weight, speed) are what predictive maintenance (capability e) actually trains on; safety-critical signals (restraint locks, e-stop log) are what get the priority-uplink tag; environmental (corrosion/moisture) matters because these are 18th-century rides aging outdoors; and queue-length is really a crowd-analytics (capability b) input that happens to live in this zone. Splitting them out now means each downstream capability can be pointed at exactly the signals it needs later, instead of one undifferentiated "ride telemetry" stream.
 
 ## What's still open (for a later pass, not now)
 

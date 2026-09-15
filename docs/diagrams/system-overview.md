@@ -78,6 +78,20 @@ Underneath all six: an **edge/MQTT layer** that copes with patchy on-site wifi (
 
 **Consistency check across all six** (a running concern, not a one-time pass): each backend capability follows the same shape — sensor/data in, anomaly/model output, a human (vet, horticulturist, staff) in the loop before anything acts on it — and every capability, customer-facing or not, ultimately depends on the same model gateway, so swapping or losing an AI provider is a platform-level fix, not a six-times-over rewrite.
 
-## Next: drilling into the on-site part
+## Level-2 diagrams (one per module, zoomed in one level)
 
-See [`onsite-edge.md`](onsite-edge.md) for the zoomed-in view of the estate side of this diagram (zones, sensors, and how each zone copes with patchy wifi on its own).
+All eight boxes from the picture above now have a level-2 view:
+
+| Module | Diagram |
+|---|---|
+| Estate / on-site (edge, sensors, patchy-wifi handling) | [`onsite-edge.md`](onsite-edge.md) |
+| Cloud data & AI platform (ingestion, storage, model gateway) | [`cloud-platform.md`](cloud-platform.md) |
+| b. Crowd & popularity analytics | [`ai-crowd-analytics.md`](ai-crowd-analytics.md) |
+| c. Animal health & population monitoring | [`ai-animal-health.md`](ai-animal-health.md) |
+| d. Plant & garden health monitoring | [`ai-plant-health.md`](ai-plant-health.md) |
+| e. Predictive maintenance (rides) | [`ai-predictive-maintenance.md`](ai-predictive-maintenance.md) |
+| f2. Revenue & retention engine (backend) | [`ai-revenue-retention.md`](ai-revenue-retention.md) |
+| a. Visitor AI concierge | [`ai-visitor-concierge.md`](ai-visitor-concierge.md) |
+| f1. Personalized offers & campaigns | [`ai-offers-campaigns.md`](ai-offers-campaigns.md) |
+
+Level 2 is now complete for every module. Next up (once reviewed): level 3 — going deeper into whichever module needs it most.
